@@ -6,6 +6,7 @@ public class Medico {
   private String nome;
   private String especialidade;
   private String contato;
+  private String password;
 
   public String getCrm() {
     return crm;
@@ -39,4 +40,11 @@ public class Medico {
     this.contato = contato;
   }
 
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
 }
