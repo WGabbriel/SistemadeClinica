@@ -8,6 +8,24 @@ import com.mycompany.sistemadeclinica.models.Consulta;
 public class ConsultaRepository {
   private static List<Consulta> consultas = new ArrayList<>();
 
+  static {
+    Consulta c1 = new Consulta();
+    c1.setCodigo(1);
+    c1.setDataHora("2024-06-15");
+    c1.setDataHoraVolta("2024-06-22");
+    c1.setMedico(MedicoRepository.getOne("12345"));
+    c1.setPaciente(PacienteRepository.getOne("12345678900"));
+    consultas.add(c1);
+
+    Consulta c2 = new Consulta();
+    c2.setCodigo(2);
+    c2.setDataHora("2024-06-16");
+    c2.setDataHoraVolta("2024-06-23");
+    c2.setMedico(MedicoRepository.getOne("67890"));
+    c2.setPaciente(PacienteRepository.getOne("98765432100"));
+    consultas.add(c2);
+  }
+
   public static void add(Consulta consulta) {
     consultas.add(consulta);
   }
@@ -34,5 +52,14 @@ public class ConsultaRepository {
       }
     }
     return resultado;
+  }
+
+  public static Consulta getOne(int codigo) {
+    for (Consulta c : consultas) {
+      if (c.getCodigo() == codigo) {
+        return c;
+      }
+    }
+    return null;
   }
 }

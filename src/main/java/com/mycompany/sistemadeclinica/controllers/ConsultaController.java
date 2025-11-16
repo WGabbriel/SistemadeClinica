@@ -21,33 +21,69 @@ public class ConsultaController extends HttpServlet {
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Medico m = (Medico) request.getSession().getAttribute("medicoLogado");
-    List<Consulta> consultas = ConsultaRepository.findByMedicoCrm(m.getCrm());
-    List<Paciente> pacientes = PacienteRepository.getAll();
-    request.setAttribute("consultas", consultas);
-    request.setAttribute("pacientes", pacientes);
-    request.getRequestDispatcher("/WEB-INF/jsps/medico/indexMedico.jsp").forward(request, response);
+
+    if (request.getSession().getAttribute("medicoLogado") == null) {
+      response.sendRedirect("loginMedico");
+      return;
+    }
+
+    String op = request.getParameter("op") != null ? request.getParameter("op") : "";
+
+    switch (op) {
+      case "detalhes":
+        String codigo = request.getParameter("codigo");
+        Consulta consulta = ConsultaRepository.getOne(Integer.parseInt(codigo));
+        request.setAttribute("consulta", consulta);
+        request.getRequestDispatcher("/WEB-INF/jsps/consulta/consultaDetalhes.jsp").forward(request, response);
+        break;
+
+      default:
+        Medico m = (Medico) request.getSession().getAttribute("medicoLogado");
+        List<Consulta> consultas = ConsultaRepository.findByMedicoCrm(m.getCrm());
+        List<Paciente> pacientes = PacienteRepository.getAll();
+        request.setAttribute("consultas", consultas);
+        request.setAttribute("pacientes", pacientes);
+        getServletContext().getRequestDispatcher("/WEB-INF/jsps/medico/indexMedico.jsp").forward(request, response);
+        break;
+    }
+
   }
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    Paciente p = PacienteRepository.getOne(request.getParameter("pacienteId"));
-    Medico m = (Medico) request.getSession().getAttribute("medicoLogado");
-    String data = (String) request.getParameter("dataConsulta");
-    String dataVolta = (String) request.getParameter("dataHoraVolta");
-    String obs = (String) request.getParameter("observacoes");
 
-    Consulta c = new Consulta();
+    String op = request.getParameter("op") != null ? request.getParameter("op") : "";
 
-    c.setPaciente(p);
-    c.setMedico(m);
-    c.setDataHora(data);
-    c.setDataHoraVolta(dataVolta);
-    c.setObservacao(obs);
+    switch (op) {
+      case "detalhes":
+        String codigo = request.getParameter("codigo");
+        Consulta consulta = ConsultaRepository.getOne(Integer.parseInt(codigo));
+        request.setAttribute("consulta", consulta);
+        request.getRequestDispatcher("/WEB-INF/jsps/consulta/consultaDetalhes.jsp").forward(request, response);
+        break;
 
-    ConsultaRepository.add(c);
+      default:
+        Paciente p = PacienteRepository.getOne(request.getParameter("pacienteId"));
+        Medico m = (Medico) request.getSession().getAttribute("medicoLogado");
+        String data = (String) request.getParameter("dataConsulta");
+        String dataVolta = (String) request.getParameter("dataHoraVolta");
+        String obs = (String) request.getParameter("observacoes");
 
-    response.sendRedirect("consultas");
+        Consulta c = new Consulta();
+
+        c.setPaciente(p);
+        c.setMedico(m);
+        c.setDataHora(data);
+        c.setDataHoraVolta(dataVolta);
+        c.setObservacao(obs);
+
+        ConsultaRepository.add(c);
+
+        response.sendRedirect("consultas");
+
+        break;
+    }
+
   }
 }

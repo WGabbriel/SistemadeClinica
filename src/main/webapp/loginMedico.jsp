@@ -18,7 +18,7 @@
 
     <body>
       <c:if test="${sessionScope.medicoLogado ne null}">
-        <c:redirect url="Medico" />
+        <c:redirect url="loginMedico"/>
       </c:if>
 
       <h1>Login Medicos</h1>
@@ -27,7 +27,7 @@
         <form method="post" action="loginMedico" style="width: 22rem">
           <input type="hidden" name="op" value="login" />
           <div data-mdb-input-init="" class="form-outline mb-4" data-mdb-input-initialized="true">
-            <input type="text" name="login" id="form2Example1" class="form-control" />
+            <input type="text" name="crm" id="form2Example1" class="form-control" />
             <label class="form-label" for="form2Example1" style="margin-left: 0px">CRM</label>
             <div class="form-notch">
               <div class="form-notch-leading" style="width: 9px"></div>
