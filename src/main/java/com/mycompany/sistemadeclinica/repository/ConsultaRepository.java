@@ -7,10 +7,11 @@ import com.mycompany.sistemadeclinica.models.Consulta;
 
 public class ConsultaRepository {
   private static List<Consulta> consultas = new ArrayList<>();
+  private static int nextCodigo = 1;
 
   static {
     Consulta c1 = new Consulta();
-    c1.setCodigo(1);
+    c1.setCodigo(nextCodigo++);
     c1.setDataHora("2024-06-15");
     c1.setDataHoraVolta("2024-06-22");
     c1.setMedico(MedicoRepository.getOne("12345"));
@@ -18,7 +19,7 @@ public class ConsultaRepository {
     consultas.add(c1);
 
     Consulta c2 = new Consulta();
-    c2.setCodigo(2);
+    c2.setCodigo(nextCodigo++);
     c2.setDataHora("2024-06-16");
     c2.setDataHoraVolta("2024-06-23");
     c2.setMedico(MedicoRepository.getOne("67890"));
@@ -27,6 +28,7 @@ public class ConsultaRepository {
   }
 
   public static void add(Consulta consulta) {
+    consulta.setCodigo(nextCodigo++);
     consultas.add(consulta);
   }
 

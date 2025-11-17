@@ -12,6 +12,8 @@ public class ProntuarioRepository {
   private static List<Prontuario> prontuarios = new ArrayList<>();
 
   public static void add(Prontuario prontuario) {
+    Consulta consulta = prontuario.getConsulta();
+    consulta.setProntuario(prontuario);
     prontuarios.add(prontuario);
   }
 
