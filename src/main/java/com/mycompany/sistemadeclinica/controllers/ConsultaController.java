@@ -6,8 +6,10 @@ import java.util.List;
 import com.mycompany.sistemadeclinica.models.Consulta;
 import com.mycompany.sistemadeclinica.models.Medico;
 import com.mycompany.sistemadeclinica.models.Paciente;
+import com.mycompany.sistemadeclinica.models.Prontuario;
 import com.mycompany.sistemadeclinica.repository.ConsultaRepository;
 import com.mycompany.sistemadeclinica.repository.PacienteRepository;
+import com.mycompany.sistemadeclinica.repository.ProntuarioRepository;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

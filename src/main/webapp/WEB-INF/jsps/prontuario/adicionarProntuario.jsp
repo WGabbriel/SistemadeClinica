@@ -13,7 +13,7 @@
     <div class="container">
       <form action="prontuario" method="post">
         <input type="hidden" name="op" value="add">
-          <input type="hidden" name="consulta" value="${consulta.codigo}">
+        <input type="hidden" name="consulta" value="${consulta.codigo}">
         <div class="mb-3">
           <label for="descricao" class="form-label">Descrição</label>
           <textarea id="descricao" name="descricao" class="form-control" rows="4" required
@@ -25,7 +25,7 @@
             placeholder="Observações"></textarea>
         </div>
         <button type="button" class="btn btn-secondary" onclick="window.history.back()">Cancelar</button>
-        <button type="submit" class="btn btn-success">Salvar</button>
+        <button type="submit" class="btn btn-success" onclick="window.history.back()">Salvar</button>
       </form>
     </div>
 

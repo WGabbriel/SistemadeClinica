@@ -1,13 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <p>Descrição: ${prontuario.descricao}</p>
-  <p>Observações: ${prontuario.observacao}</p>
-  <p>Consulta: ${prontuario.consulta.codigo}</p>
-</body>
-</html>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+    <!DOCTYPE html>
+    <html lang="pt-BR">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Prontuário da Consulta</title>
+    </head>
+
+    <body>
+        <p><strong>Descrição:</strong> ${consulta.prontuario.descricao}</p>
+        <p><strong>Observações:</strong> ${consulta.prontuario.observacao}</p>
+    </body>
+
+    </html>

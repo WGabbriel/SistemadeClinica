@@ -18,17 +18,7 @@ public class PronturioController extends HttpServlet {
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String op = request.getParameter("op") != null ? request.getParameter("op") : "";
 
-    switch (op) {
-      case "add":
-        String codigo = request.getParameter("consulta");
-        Consulta consulta = ConsultaRepository.getOne(Integer.parseInt(codigo));
-        request.setAttribute("consulta", consulta);
-        getServletContext().getRequestDispatcher("/WEB-INF/jsps/prontuario/prontuarioAdd.jsp").forward(request,
-            response);
-        break;
-    }
   }
 
   @Override
@@ -47,8 +37,7 @@ public class PronturioController extends HttpServlet {
         p.setObservacao(observacao);
         p.setConsulta(c);
         ProntuarioRepository.add(p);
-        getServletContext().getRequestDispatcher("/WEB-INF/jsps/consulta/consultaDetalhes.jsp").forward(request,
-            response);
+        response.sendRedirect("consultas");
         break;
     }
 

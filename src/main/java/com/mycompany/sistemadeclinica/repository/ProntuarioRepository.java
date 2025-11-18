@@ -2,7 +2,6 @@ package com.mycompany.sistemadeclinica.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import com.mycompany.sistemadeclinica.models.Consulta;
 import com.mycompany.sistemadeclinica.models.Prontuario;
@@ -19,11 +18,5 @@ public class ProntuarioRepository {
 
   public static void remove(Prontuario prontuario) {
     prontuarios.remove(prontuario);
-  }
-
-  public static Optional<Prontuario> findByConsulta(Consulta consulta) {
-    return prontuarios.stream()
-        .filter(p -> p.getConsulta() != null && p.getConsulta().equals(consulta))
-        .findFirst();
   }
 }
